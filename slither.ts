@@ -1,9 +1,7 @@
-const CANVAS_BORDER_COLOUR = 'black';
-const CANVAS_BACKGROUND_COLOUR = "white";
-const SNAKE_COLOUR = 'lightgreen';
-const SNAKE_BORDER_COLOUR = 'darkgreen';
-const FOOD_COLOUR = 'red';
-const FOOD_BORDER_COLOUR = 'darkred';
+const CANVAS_BACKGROUND_COLOUR = "#ffe4c4";
+const SNAKE_COLOUR = '#91CED7';
+const FOOD_COLOUR = '#ff6f69';
+const GAME_SPEED = 100;
 
 let snake = [
 {x: 150, y: 150},
@@ -25,6 +23,8 @@ let changingDirection: boolean
 let gameCanvas = <HTMLCanvasElement> document.getElementById("gameCanvas");
 let ctx = gameCanvas.getContext("2d");
 
+manipulateCanvasDimensions();
+
 clearCanvas();
 
 main();
@@ -32,6 +32,13 @@ main();
 createFood();
 
 document.addEventListener("keydown", changeDirection)
+
+function manipulateCanvasDimensions()   {
+    gameCanvas.style.width = '80%'
+    gameCanvas.style.height = '80%';
+    gameCanvas.width  = gameCanvas.offsetWidth;
+    gameCanvas.height = gameCanvas.offsetHeight;
+}
 
 function main() {
     if (didGameEnd()) return;
@@ -43,12 +50,12 @@ function main() {
         drawSnake();
         
         main();
-    }, 100)
+    }, GAME_SPEED)
 }
 
 function clearCanvas() {
     ctx.fillStyle = CANVAS_BACKGROUND_COLOUR;
-    ctx.strokeStyle = CANVAS_BORDER_COLOUR;
+    ctx.strokeStyle = CANVAS_BACKGROUND_COLOUR;
     ctx.fillRect(0, 0, gameCanvas.width, gameCanvas.height);
     ctx.strokeRect(0, 0, gameCanvas.width, gameCanvas.height);
 }
@@ -59,7 +66,7 @@ function drawSnake()    {
 
 function drawSnakePart(snakePart) {
     ctx.fillStyle = SNAKE_COLOUR;
-    ctx.strokeStyle = SNAKE_BORDER_COLOUR;
+    ctx.strokeStyle = SNAKE_COLOUR;
     
     ctx.fillRect(snakePart.x, snakePart.y, 10, 10);
     ctx.strokeRect(snakePart.x, snakePart.y, 10, 10);
@@ -132,7 +139,7 @@ function createFood() {
 
 function drawFood() {
     ctx.fillStyle = FOOD_COLOUR;
-    ctx.strokeStyle = FOOD_BORDER_COLOUR;
+    ctx.strokeStyle = FOOD_COLOUR;
     ctx.fillRect(foodX, foodY, 10, 10);
     ctx.strokeRect(foodX, foodY, 10, 10);
 }

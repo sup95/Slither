@@ -1,0 +1,18 @@
+body   {
+    background-color: #fff0de;
+}
+
+#gameCanvas {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#score  {
+    text-align: right;
+    margin-right: 20px;
+    font-size: 50px;
+    color: #91CED7;
+    font-family: 'Antic Slab', serif;
+}
