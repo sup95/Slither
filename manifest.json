@@ -1,0 +1,10 @@
+{
+    "manifest_version": 2,
+  
+    "name": "Slither",
+    "version": "2.1",
+    "description": "Snake game in New Tab",
+    "chrome_url_overrides": {
+      "newtab": "slither.html"
+    }
+  }
