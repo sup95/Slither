@@ -10,8 +10,17 @@ body   {
 }
 
 #score  {
+    float: right;
     text-align: right;
     margin-right: 20px;
+    font-size: 50px;
+    color: #91CED7;
+    font-family: 'Antic Slab', serif;
+}
+
+#header  {
+    float: left;
+    margin-left: 20px;
     font-size: 50px;
     color: #91CED7;
     font-family: 'Antic Slab', serif;

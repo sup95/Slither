@@ -1,7 +1,7 @@
 var CANVAS_BACKGROUND_COLOUR = "#ffe4c4";
 var SNAKE_COLOUR = '#91CED7';
 var FOOD_COLOUR = '#ff6f69';
-var GAME_SPEED = 100;
+var GAME_SPEED = 50;
 var snake = [
     { x: 150, y: 150 },
     { x: 140, y: 150 },
@@ -17,20 +17,22 @@ var foodY;
 var changingDirection;
 var gameCanvas = document.getElementById("gameCanvas");
 var ctx = gameCanvas.getContext("2d");
-manipulateCanvasDimensions();
+manipulateCanvasDimensions('65%', '65%');
 clearCanvas();
 main();
 createFood();
 document.addEventListener("keydown", changeDirection);
-function manipulateCanvasDimensions() {
-    gameCanvas.style.width = '80%';
-    gameCanvas.style.height = '80%';
+function manipulateCanvasDimensions(width, height) {
+    gameCanvas.style.width = width;
+    gameCanvas.style.height = height;
     gameCanvas.width = gameCanvas.offsetWidth;
     gameCanvas.height = gameCanvas.offsetHeight;
 }
 function main() {
-    if (didGameEnd())
+    if (didGameEnd()) {
+        document.getElementById('header').innerHTML = "Game Over";
         return;
+    }
     setTimeout(function onTick() {
         changingDirection = false;
         clearCanvas();
