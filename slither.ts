@@ -3,18 +3,7 @@ const SNAKE_COLOUR = '#91CED7';
 const FOOD_COLOUR = '#ff6f69';
 const GAME_SPEED = 50;
 
-let snake = [
-{x: 150, y: 150},
-{x: 140, y: 150},
-{x: 130, y: 150},
-{x: 120, y: 150},
-{x: 110, y: 150}
-]
-
-let score = 0;
-
-let dx = 10;
-let dy = 0;
+let snake, dx, dy, score;
 
 let foodX: number
 let foodY: number
@@ -23,13 +12,26 @@ let changingDirection: boolean
 let gameCanvas = <HTMLCanvasElement> document.getElementById("gameCanvas");
 let ctx = gameCanvas.getContext("2d");
 
+let header = document.getElementById('header');
+
+initSnakeAndDirections();
+
+let startNewGame: boolean = true;
+
+header.addEventListener("click", (e: Event) => { 
+    if(startNewGame)    {
+        startNewGame = false;
+        resetScore();
+        resetHeader();
+        clearCanvas();
+        createFood();
+        main();
+    }
+});
+
 manipulateCanvasDimensions('65%', '65%');
 
 clearCanvas();
-
-main();
-
-createFood();
 
 document.addEventListener("keydown", changeDirection)
 
@@ -38,7 +40,9 @@ document.addEventListener("keydown", changeDirection)
  */
 function main() {
     if (didGameEnd()) {
-        document.getElementById('header').innerHTML = "Game Over";
+        header.innerHTML = "Slither Again";
+        startNewGame = true;
+        initSnakeAndDirections();
         return;
     }
     setTimeout(function onTick() {
@@ -50,6 +54,19 @@ function main() {
         
         main();
     }, GAME_SPEED)
+}
+
+function initSnakeAndDirections()   {
+    snake = [
+        {x: 150, y: 150},
+        {x: 140, y: 150},
+        {x: 130, y: 150},
+        {x: 120, y: 150},
+        {x: 110, y: 150}
+        ]
+    dx = 10;
+    dy = 0;
+    score = 0;
 }
 
 /**
@@ -176,6 +193,14 @@ function drawFood() {
     ctx.strokeRect(foodX, foodY, 10, 10);
 }
 
+function resetScore()   {
+    document.getElementById('score').innerHTML = "Score: " + score;
+}
+
+function resetHeader()  {
+    header.innerHTML = "Slither";
+}
+
 /**
  * Game ends when the head of the snake collides with the snake itself;
  * or when the snake hits the walls.
@@ -195,4 +220,3 @@ function didGameEnd() {
            hitToptWall ||
            hitBottomWall
 }
-
