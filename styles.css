@@ -19,7 +19,7 @@ body   {
 }
 
 #header  {
-    cursor: pointer;
+    cursor: pointer; 
     float: left;
     margin-left: 20px;
     font-size: 50px;
